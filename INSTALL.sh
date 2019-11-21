@@ -20,7 +20,14 @@ if [ ! -r ${kubectl} ]; then assert "missing kubectl: ${kubectl}"; fi
 if [ ! -r ${kubeconfig} ]; then assert "missing kubeconfig: ${kubeconfig}"; fi
 
 # install
-eval ${kubectl} --kubeconfig ${kubeconfig} apply -f namespace.yaml
-eval ${kubectl} --kubeconfig ${kubeconfig} apply -f clusterRole.yaml
-eval ${kubectl} --kubeconfig ${kubeconfig} apply -f config-map.yaml
-eval ${kubectl} --kubeconfig ${kubeconfig} apply -f prometheus-deployment.yaml
+eval ${kubectl} --kubeconfig ${kubeconfig} apply -f namespace.yaml -n monitoring
+eval ${kubectl} --kubeconfig ${kubeconfig} apply -f clusterRole.yaml -n monitoring
+eval ${kubectl} --kubeconfig ${kubeconfig} apply -f config-map.yaml -n monitoring
+eval ${kubectl} --kubeconfig ${kubeconfig} apply -f prometheus-deployment.yaml -n monitoring
+eval ${kubectl} --kubeconfig ${kubeconfig} apply -f prometheus-service.yaml -n monitoring
+
+# install alert manager
+eval ${kubectl} --kubeconfig ${kubeconfig} apply -f alertManager-configmap.yaml -n monitoring
+eval ${kubectl} --kubeconfig ${kubeconfig} apply -f alertTemplate-configmap.yaml -n monitoring
+eval ${kubectl} --kubeconfig ${kubeconfig} apply -f alertManager-deployment.yaml -n monitoring
+eval ${kubectl} --kubeconfig ${kubeconfig} apply -f alertManager-service.yaml -n monitoring
