@@ -20,7 +20,7 @@ if [ ! -r ${kubectl} ]; then assert "missing kubectl: ${kubectl}"; fi
 if [ ! -r ${kubeconfig} ]; then assert "missing kubeconfig: ${kubeconfig}"; fi
 
 # install
-eval ${kubectl} --kubeconfig ${kubeconfig} apply -f namespace.yml
-eval ${kubectl} --kubeconfig ${kubeconfig} apply -f clusterRole.yml
-eval ${kubectl} --kubeconfig ${kubeconfig} apply -f config-map.yml
-eval ${kubectl} --kubeconfig ${kubeconfig} apply -f prometheus-deployment.yml
+eval ${kubectl} --kubeconfig ${kubeconfig} apply -f namespace.yaml
+eval ${kubectl} --kubeconfig ${kubeconfig} apply -f clusterRole.yaml
+eval ${kubectl} --kubeconfig ${kubeconfig} apply -f config-map.yaml
+eval ${kubectl} --kubeconfig ${kubeconfig} apply -f prometheus-deployment.yaml
